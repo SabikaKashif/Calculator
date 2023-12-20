@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="calscript.js"></script>
+    <!-- Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+
+    <div class="mainbox">
+        <div class="screen">
+            <form>
+                <div class="display">
+                    <input class="input" type="text" name="display" readonly>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="keypad">
+            <div class="row1">
+                <div class="btn1" id="clear" onclick="clearDisplay()"
+                    style="color: rgba(201,81,61,255); font-family: Arial, Helvetica, sans-serif;">C</div>
+                <div class="btndiv" id="per" onclick="pushToDisplay('%')"><i class="fa-solid fa-percent"></i></div>
+                <div class="btn1" id="bksp"><i class="fa-solid fa-delete-left fa-customize"
+                        style="color:rgba(52,116,238,255);"></i></div>
+                <div class="btndiv" id="divide" onclick="pushToDisplay('÷')"><i class="fa-solid fa-divide"></i></div>
+            </div>
+            <div class="row2">
+                <div class="btn1" id="7" onclick="pushToDisplay('7')">7</div>
+                <div class="btn1" id="8" onclick="pushToDisplay('8')">8</div>
+                <div class="btn1" id="9" onclick="pushToDisplay('9')">9</div>
+                <div class="btndiv" id="x" onclick="pushToDisplay('x')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="row3">
+                <div class="btn1" id="4" onclick="pushToDisplay('4')">4</div>
+                <div class="btn1" id="5" onclick="pushToDisplay('5')">5</div>
+                <div class="btn1" id="6" onclick="pushToDisplay('6')">6</div>
+                <div class="btndiv" id="-" onclick="pushToDisplay('-')"><i class="fa-solid fa-minus"></i></div>
+            </div>
+            <div class="row4">
+                <div class="btn1" id="1" onclick="pushToDisplay('1')">1</div>
+                <div class="btn1" id="2" onclick="pushToDisplay('2')">2</div>
+                <div class="btn1" id="3" onclick="pushToDisplay('3')">3</div>
+                <div class="btndiv" id="+" onclick="pushToDisplay('+')"><i class="fa-solid fa-plus"></i></div>
+            </div>
+            <div class="row5">
+                <div class="btn1" id="shift"><i class="fa-solid fa-bars"></i></div>
+                <div class="btn1" id="0" onclick="pushToDisplay('0')">0</div>
+                <div class="btn1" id="." onclick="pushToDisplay('.')">.</div>
+                <div class="btn1" id="b"><i class="fa-solid fa-equals"></i></div>
+            </div>
+        </div>
+    </div>
+    <!-- Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</body>
+
+</html>
