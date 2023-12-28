@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
-    <script src="calscript.js"></script>
+
     <!-- Development version -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
@@ -18,14 +18,11 @@
 </head>
 
 <body>
-
-
     <div class="mainbox">
         <div class="screen">
             <form>
                 <div class="display">
                     <input class="input" type="text" name="display" readonly>
-
                 </div>
             </form>
         </div>
@@ -35,33 +32,33 @@
                 <div class="btn1" id="clear" onclick="clearDisplay()"
                     style="color: rgba(201,81,61,255); font-family: Arial, Helvetica, sans-serif;">C</div>
                 <div class="btndiv" id="per" onclick="pushToDisplay('%')"><i class="fa-solid fa-percent"></i></div>
-                <div class="btn1" id="bksp"><i class="fa-solid fa-delete-left fa-customize"
+                <div class="btn1" id="bksp" onclick="backspace()"><i class="fa-solid fa-delete-left fa-customize"
                         style="color:rgba(52,116,238,255);"></i></div>
-                <div class="btndiv" id="divide" onclick="pushToDisplay('÷')"><i class="fa-solid fa-divide"></i></div>
+                <div class="btndiv" id="divide" onclick="setOperation('÷')"><i class="fa-solid fa-divide"></i></div>
             </div>
             <div class="row2">
                 <div class="btn1" id="7" onclick="pushToDisplay('7')">7</div>
                 <div class="btn1" id="8" onclick="pushToDisplay('8')">8</div>
                 <div class="btn1" id="9" onclick="pushToDisplay('9')">9</div>
-                <div class="btndiv" id="x" onclick="pushToDisplay('x')"><i class="fa-solid fa-xmark"></i></div>
+                <div class="btndiv" id="x" onclick="setOperation('x')"><i class="fa-solid fa-xmark"></i></div>
             </div>
             <div class="row3">
                 <div class="btn1" id="4" onclick="pushToDisplay('4')">4</div>
                 <div class="btn1" id="5" onclick="pushToDisplay('5')">5</div>
                 <div class="btn1" id="6" onclick="pushToDisplay('6')">6</div>
-                <div class="btndiv" id="-" onclick="pushToDisplay('-')"><i class="fa-solid fa-minus"></i></div>
+                <div class="btndiv" id="-" onclick="setOperation('-')"><i class="fa-solid fa-minus"></i></div>
             </div>
             <div class="row4">
                 <div class="btn1" id="1" onclick="pushToDisplay('1')">1</div>
                 <div class="btn1" id="2" onclick="pushToDisplay('2')">2</div>
                 <div class="btn1" id="3" onclick="pushToDisplay('3')">3</div>
-                <div class="btndiv" id="+" onclick="pushToDisplay('+')"><i class="fa-solid fa-plus"></i></div>
+                <div class="btndiv" id="+" onclick="setOperation('+')"><i class="fa-solid fa-plus"></i></div>
             </div>
             <div class="row5">
                 <div class="btn1" id="shift"><i class="fa-solid fa-bars"></i></div>
                 <div class="btn1" id="0" onclick="pushToDisplay('0')">0</div>
                 <div class="btn1" id="." onclick="pushToDisplay('.')">.</div>
-                <div class="btn1" id="b"><i class="fa-solid fa-equals"></i></div>
+                <div class="btn1" id="b" onclick="calculateResult()"><i class="fa-solid fa-equals"></i></div>
             </div>
         </div>
     </div>
@@ -70,6 +67,62 @@
 
     <!-- Production version -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        function calculateOperation(values, operation) {
+            if (values.length < 2) {
+                return "NONE";
+            }
+
+            let result = parseFloat(values[0]);
+            for (let i = 1; i < values.length - 1; i += 2) {
+                const nextValue = parseFloat(values[i + 1]);
+                if (isNaN(nextValue)) {
+                    return "NONE";
+                }
+
+                if (values[i] === "+") {
+                    result += nextValue;
+                } else if (values[i] === "-") {
+                    result -= nextValue;
+                } else if (values[i] === "x") {
+                    result *= nextValue;
+                } else if (values[i] === "÷" && nextValue !== 0) {
+                    result /= nextValue;
+                } else {
+                    return "NONE";
+                }
+            }
+            return result;
+        }
+
+        function pushToDisplay(value) {
+            document.forms[0].display.value += value;
+        }
+
+        function clearDisplay() {
+            document.forms[0].display.value = '';
+        }
+
+        function backspace() {
+            var currentValue = document.forms[0].display.value;
+            document.forms[0].display.value = currentValue.slice(0, -1);
+        }
+
+        function setOperation(operation) {
+            var currentValue = document.forms[0].display.value;
+            if (currentValue !== '') {
+                document.forms[0].display.value += ' ' + operation + ' ';
+            }
+        }
+
+        function calculateResult() {
+            const expression = document.forms[0].display.value;
+            const values = expression.split(' ');
+            const result = calculateOperation(values, values[values.length - 1]);
+            document.forms[0].display.value = result;
+        }
+    </script>
 </body>
 
 </html>
